@@ -1,0 +1,5 @@
+rules:
+    - Apie\ApiePhpstanRules\ValueObjectHasNoConstructor
+parameters:
+	ignoreErrors:
+	    - '#generic class Apie\\Core\\Lists\\Item(List|Hashmap) (but |)does not specify its types: T#'
