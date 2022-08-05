@@ -16,13 +16,32 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
         return new ValueObjectHasNoConstructor();
     }
 
-    public function testRule(): void
+    /**
+     * @dataProvider ruleProvider
+     */
+    public function testRule(array $rules, string... $fileToAnalyse): void
     {
-        $this->analyse([__DIR__ . '/Fixtures/ValueObjectWithoutConstructor.php'], [
+        $this->analyse($fileToAnalyse, $rules);
+    }
+
+    public function ruleProvider(): iterable
+    {
+        yield [
             [
-                "Class 'ValueObjectWithoutConstructor' is a value object, but it has no constructor.",
-                7, // asserted error line
+                ["Class 'ValueObjectWithoutConstructor' is a value object, but it has no constructor.", 7],
             ],
-        ]);
+            __DIR__ . '/Fixtures/ValueObjectWithoutConstructor.php',
+        ];
+        yield [
+            [
+                /*["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 7],*/ // TODO
+            ],
+            __DIR__ . '/Fixtures/ValueObjectWithBaseClass.php',
+            __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
+        ];
+        yield [
+            [],
+            __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
+        ];
     }
 }

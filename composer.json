@@ -28,6 +28,13 @@
     "phpspec/prophecy-phpunit": "^2.0",
     "phpstan/phpstan": "^1.8.2"
   },
+  "extra": {
+    "phpstan": {
+      "includes": [
+        "apie-phpstan-rules.neon"
+      ]
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true
 }
