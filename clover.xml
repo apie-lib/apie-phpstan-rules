@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1659762760">
+  <project timestamp="1659762760">
+    <file name="/home/runner/work/apie-phpstan-rules/apie-phpstan-rules/src/ValueObjectHasNoConstructor.php">
+      <class name="Apie\ApiePhpstanRules\ValueObjectHasNoConstructor" namespace="global">
+        <metrics complexity="6" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+      </class>
+      <line num="18" type="method" name="getNodeType" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="26" type="method" name="processNode" visibility="public" complexity="5" crap="5" count="3"/>
+      <line num="28" type="stmt" count="3"/>
+      <line num="29" type="stmt" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <metrics loc="45" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+    </file>
+    <metrics files="1" loc="45" ncloc="36" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="10" coveredelements="10"/>
+  </project>
+</coverage>
