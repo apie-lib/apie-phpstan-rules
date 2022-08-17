@@ -1,5 +1,8 @@
 rules:
     - Apie\ApiePhpstanRules\ValueObjectHasNoConstructor
 parameters:
-	ignoreErrors:
-	    - '#generic class Apie\\Core\\Lists\\Item(List|Hashmap) (but |)does not specify its types: T#'
+    ignoreErrors:
+        # you do not have to specify subtype of ItemList or Itemhashmap.
+        - '#generic class Apie\\Core\\Lists\\Item(List|Hashmap) (but |)does not specify its types: T#'
+        # issue with dependency identifier and entity and generics.
+        - '# of Apie\\Core\\Entities\\EntityInterface>#'
