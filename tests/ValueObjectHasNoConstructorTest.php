@@ -19,7 +19,7 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
     /**
      * @dataProvider ruleProvider
      */
-    public function testRule(array $rules, string... $fileToAnalyse): void
+    public function testLegacyRule(array $rules, string... $fileToAnalyse): void
     {
         $this->analyse($fileToAnalyse, $rules);
     }
