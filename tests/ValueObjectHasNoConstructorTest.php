@@ -34,10 +34,10 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
         ];
         yield [
             [
-                ["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 7],
+                ["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 4],
             ],
-            __DIR__ . '/Fixtures/ValueObjectWithBaseClass.php',
             __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
+            __DIR__ . '/Fixtures/ValueObjectWithBaseClass.php',
         ];
         yield [
             [],
