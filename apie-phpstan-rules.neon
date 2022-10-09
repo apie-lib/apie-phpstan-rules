@@ -1,5 +1,6 @@
 rules:
     - Apie\ApiePhpstanRules\ValueObjectHasNoConstructor
+    - Apie\ApiePhpstanRules\ObjectShouldNotImplementMultipleInterfaces
 parameters:
     ignoreErrors:
         # you do not have to specify subtype of ItemList or Itemhashmap.

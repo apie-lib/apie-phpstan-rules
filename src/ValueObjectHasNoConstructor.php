@@ -35,7 +35,7 @@ final class ValueObjectHasNoConstructor implements Rule
         if ($node->isAbstract() || $node->getMethod('__construct')) {
             return [];
         }
-        $class = $this->getClass($scope);
+        $class = $this->getClass($node, $scope);
         if ($class->implementsInterface(ValueObjectInterface::class) && !$class->hasConstructor()) {
             return [
                 __CLASS__ => sprintf(
@@ -48,8 +48,8 @@ final class ValueObjectHasNoConstructor implements Rule
         ];
     }
 
-    private function getClass(Scope $scope): ClassReflection
+    private function getClass(Node $node, Scope $scope): ClassReflection
     {
-        return $this->reflectionProvider->getClass($scope->getNamespace() . '\\' . basename($scope->getFile(), '.php'));
+        return $this->reflectionProvider->getClass($scope->getNamespace() . '\\' . $node->name->toString());
     }
 }
