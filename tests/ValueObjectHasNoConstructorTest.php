@@ -3,6 +3,10 @@ namespace Apie\Tests\ApiePhpstanRules;
 
 use Apie\ApiePhpstanRules\ValueObjectHasNoConstructor;
 use PHPStan\Rules\Rule;
+use PHPStan\Reflection\ReflectionProvider\Reflection\ProviderFactory;
+use PHPStan\Reflection\ReflectionProviderStaticAccessor;
+use PHPStan\Reflection\ReflectionProvider\DirectReflectionProviderProvider;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Testing\RuleTestCase;
 
 /**
@@ -13,7 +17,7 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
     protected function getRule(): Rule
     {
         // getRule() method needs to return an instance of the tested rule
-        return new ValueObjectHasNoConstructor();
+        return new ValueObjectHasNoConstructor($this->createReflectionProvider());
     }
 
     /**
@@ -34,7 +38,7 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
         ];
         yield [
             [
-                /*["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 7],*/ // TODO
+                ["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 7],
             ],
             __DIR__ . '/Fixtures/ValueObjectWithBaseClass.php',
             __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
@@ -44,4 +48,9 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
             __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
         ];
     }
+
+    public static function getAdditionalConfigFiles(): array
+	{
+		return [__DIR__ . '/test.neon'];
+	}
 }
