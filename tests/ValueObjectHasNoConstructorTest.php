@@ -3,10 +3,6 @@ namespace Apie\Tests\ApiePhpstanRules;
 
 use Apie\ApiePhpstanRules\ValueObjectHasNoConstructor;
 use PHPStan\Rules\Rule;
-use PHPStan\Reflection\ReflectionProvider\Reflection\ProviderFactory;
-use PHPStan\Reflection\ReflectionProviderStaticAccessor;
-use PHPStan\Reflection\ReflectionProvider\DirectReflectionProviderProvider;
-use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Testing\RuleTestCase;
 
 /**
@@ -48,9 +44,4 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
             __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
         ];
     }
-
-    public static function getAdditionalConfigFiles(): array
-	{
-		return [__DIR__ . '/test.neon'];
-	}
 }

@@ -5,10 +5,9 @@ use Apie\Core\ValueObjects\Interfaces\ValueObjectInterface;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Reflection\ClassReflection;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
-use ReflectionClass;
 
 /**
  * Value object without constructor is often a mistake.
