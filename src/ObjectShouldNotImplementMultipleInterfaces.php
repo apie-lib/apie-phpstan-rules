@@ -31,6 +31,10 @@ final class ObjectShouldNotImplementMultipleInterfaces implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
+        $nodeName = $node->name->toString();
+        if ($node->isAnonymous() || str_starts_with($nodeName, 'Anonymous')) {
+            return [];
+        }
         $class = $this->getClass($node, $scope);
         $interfacesToCheck = [ValueObjectInterface::class, DtoInterface::class, EntityInterface::class];
         $conflicted = [];
@@ -50,7 +54,7 @@ final class ObjectShouldNotImplementMultipleInterfaces implements Rule
             return [
                 __CLASS__ => sprintf(
                     "Class '%s' has conflicting interfaces: %s",
-                    $node->name->toString(),
+                    $nodeName,
                     implode(', ', $conflicted)
                 )
             ];

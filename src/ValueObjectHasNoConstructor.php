@@ -32,7 +32,8 @@ final class ValueObjectHasNoConstructor implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        if ($node->isAbstract() || $node->getMethod('__construct')) {
+        $nodeName = $node->name->toString();
+        if ($node->isAbstract() || str_starts_with($nodeName, 'Anonymous') || $node->isAnonymous() || $node->getMethod('__construct')) {
             return [];
         }
         $class = $this->getClass($node, $scope);

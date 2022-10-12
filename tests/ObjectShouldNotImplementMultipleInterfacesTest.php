@@ -33,6 +33,10 @@ class ObjectShouldNotImplementMultipleInterfacesTest extends RuleTestCase
             __DIR__ . '/Fixtures/ObjectWithMultipleInterfaces.php',
         ];
         yield [
+            [],
+            __DIR__ . '/Fixtures/ClassWithAnonymousClass.php',
+        ];
+        yield [
             [
             ],
             __DIR__ . '/Fixtures/ValueObjectWithoutConstructor.php',
