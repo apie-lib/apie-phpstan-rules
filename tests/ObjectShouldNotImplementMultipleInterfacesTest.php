@@ -12,7 +12,6 @@ class ObjectShouldNotImplementMultipleInterfacesTest extends RuleTestCase
 {
     protected function getRule(): Rule
     {
-        // getRule() method needs to return an instance of the tested rule
         return new ObjectShouldNotImplementMultipleInterfaces($this->createReflectionProvider());
     }
 
