@@ -26,6 +26,18 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
     public function ruleProvider(): iterable
     {
         yield [
+            [
+                ["Class 'ValueObjectWithoutConstructor' is a value object, but it has no constructor.", 7]
+            ],
+            __DIR__ . '/Fixtures/ValueObjectWithoutConstructor.php',
+        ];
+        yield [
+            [
+                ["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 4]
+            ],
+            __DIR__ . '/Fixtures/ValueObjectWithBaseClass.php',
+        ];
+        yield [
             [],
             __DIR__ . '/Fixtures/AbstractValueObjectWithoutConstructor.php',
         ];
