@@ -14,7 +14,7 @@ use PHPStan\Rules\Rule;
  *
  * Because if there is no constructor people can bypass caling fromNative and call new ValueObject() without
  * arguments.
- * 
+ *
  * @implements Rule<Class_>
  */
 final class ValueObjectHasNoConstructor implements Rule

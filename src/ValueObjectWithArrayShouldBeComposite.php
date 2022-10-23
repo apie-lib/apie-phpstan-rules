@@ -12,7 +12,7 @@ use PHPStan\Rules\Rule;
 /**
  * If value objects have array or stdClass as return type then they require the CompositeValueObject trait
  * as the spec has no defined behaviour for value objects with arrays otherwise.
- * 
+ *
  * @implements Rule<Class_>
  */
 final class ValueObjectWithArrayShouldBeComposite implements Rule
