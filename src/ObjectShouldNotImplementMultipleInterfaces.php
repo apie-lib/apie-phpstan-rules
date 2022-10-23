@@ -13,6 +13,7 @@ use PHPStan\Rules\Rule;
 
 /**
  * Ensure a class is not a value object and an entity at the same time for example.
+ * @implements Rule<Class_>
  */
 final class ObjectShouldNotImplementMultipleInterfaces implements Rule
 {
@@ -63,7 +64,7 @@ final class ObjectShouldNotImplementMultipleInterfaces implements Rule
         ];
     }
 
-    private function getClass(Node $node, Scope $scope): ClassReflection
+    private function getClass(Class_ $node, Scope $scope): ClassReflection
     {
         return $this->reflectionProvider->getClass($scope->getNamespace() . '\\' . $node->name->toString());
     }

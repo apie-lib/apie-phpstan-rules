@@ -14,6 +14,8 @@ use PHPStan\Rules\Rule;
  *
  * Because if there is no constructor people can bypass caling fromNative and call new ValueObject() without
  * arguments.
+ * 
+ * @implements Rule<Class_>
  */
 final class ValueObjectHasNoConstructor implements Rule
 {
@@ -49,7 +51,7 @@ final class ValueObjectHasNoConstructor implements Rule
         ];
     }
 
-    private function getClass(Node $node, Scope $scope): ClassReflection
+    private function getClass(Class_ $node, Scope $scope): ClassReflection
     {
         return $this->reflectionProvider->getClass($scope->getNamespace() . '\\' . $node->name->toString());
     }

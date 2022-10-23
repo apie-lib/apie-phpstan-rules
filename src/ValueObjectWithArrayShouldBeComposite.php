@@ -12,6 +12,8 @@ use PHPStan\Rules\Rule;
 /**
  * If value objects have array or stdClass as return type then they require the CompositeValueObject trait
  * as the spec has no defined behaviour for value objects with arrays otherwise.
+ * 
+ * @implements Rule<Class_>
  */
 final class ValueObjectWithArrayShouldBeComposite implements Rule
 {
@@ -40,11 +42,11 @@ final class ValueObjectWithArrayShouldBeComposite implements Rule
             foreach ($method->getVariants() as $variant) {
                 if ($variant->getNativeReturnType() instanceof \PHPStan\Type\ArrayType) {
                     return [
-                __CLASS__ => sprintf(
-                    "Class '%s' is a value object that returns an array, but it does not use CompositeTrait.",
-                    $nodeName
-                )
-            ];
+                        __CLASS__ => sprintf(
+                            "Class '%s' is a value object that returns an array, but it does not use CompositeTrait.",
+                            $nodeName
+                        )
+                    ];
                 }
             }
         }
@@ -52,7 +54,7 @@ final class ValueObjectWithArrayShouldBeComposite implements Rule
         ];
     }
 
-    private function getClass(Node $node, Scope $scope): ClassReflection
+    private function getClass(Class_ $node, Scope $scope): ClassReflection
     {
         return $this->reflectionProvider->getClass($scope->getNamespace() . '\\' . $node->name->toString());
     }
