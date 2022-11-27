@@ -1,7 +1,8 @@
 rules:
     - Apie\ApiePhpstanRules\ValueObjectHasNoConstructor
     - Apie\ApiePhpstanRules\ObjectShouldNotImplementMultipleInterfaces
-    #- Apie\ApiePhpstanRules\ValueObjectWithArrayShouldBeComposite
+    - Apie\ApiePhpstanRules\ValueObjectWithArrayShouldBeComposite
+    - Apie\ApiePhpstanRules\EntityGetIdShouldBeSpecific
 parameters:
     ignoreErrors:
         # you do not have to specify subtype of ItemList or Itemhashmap.

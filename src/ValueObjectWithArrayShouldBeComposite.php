@@ -1,6 +1,8 @@
 <?php
 namespace Apie\ApiePhpstanRules;
 
+use Apie\CompositeValueObjects\CompositeValueObject;
+use Apie\Core\Attributes\SchemaMethod;
 use Apie\Core\ValueObjects\Interfaces\ValueObjectInterface;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
@@ -41,12 +43,16 @@ final class ValueObjectWithArrayShouldBeComposite implements Rule
             $method = $class->getMethod('toNative', $scope);
             foreach ($method->getVariants() as $variant) {
                 if ($variant->getNativeReturnType() instanceof \PHPStan\Type\ArrayType) {
-                    return [
-                        __CLASS__ => sprintf(
-                            "Class '%s' is a value object that returns an array, but it does not use CompositeTrait.",
-                            $nodeName
-                        )
-                    ];
+                    if (!in_array(CompositeValueObject::class, $class->getNativeReflection()->getTraitNames())) {
+                        if (empty($class->getNativeReflection()->getAttributes(SchemaMethod::class))) {
+                            return [
+                                __CLASS__ => sprintf(
+                                    "Class '%s' is a value object that returns an array, but it does not use CompositeValueObject trait.",
+                                    $nodeName
+                                )
+                            ];
+                        }
+                    }
                 }
             }
         }

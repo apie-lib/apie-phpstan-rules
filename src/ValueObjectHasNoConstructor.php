@@ -13,7 +13,7 @@ use PHPStan\Rules\Rule;
  * Value object without constructor is often a mistake.
  *
  * Because if there is no constructor people can bypass caling fromNative and call new ValueObject() without
- * arguments.
+ * arguments. That is very likely a mistake.
  *
  * @implements Rule<Class_>
  */

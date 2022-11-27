@@ -28,7 +28,7 @@ class ValueObjectWithArrayShouldBeCompositeTest extends RuleTestCase
     {
         yield [
             [
-                ["Class 'ValueObjectWithArray' is a value object that returns an array, but it does not use CompositeTrait.", 7],
+                ["Class 'ValueObjectWithArray' is a value object that returns an array, but it does not use CompositeValueObject trait.", 7],
             ],
             __DIR__ . '/Fixtures/ValueObjectWithArray.php',
         ];
