@@ -26,3 +26,144 @@ and in your phpstan.neon the include to the neon file.
 includes
     - './vendor/apie/apie-phpstan-rules/apie-phpstan-rules.neon'
 ```
+
+### Added phpstan rules
+
+#### Entity getId() should be specific
+The interface of an entity requires you to have a getId() method with IdentifierInterface as return type. For better
+reflection it is better if you specify the class it returns instead.
+
+```php
+<?php
+class ExampleEntity implements EntityInterface
+{
+    public function __construct(private readonly ExampleEntityIdentifier $id)
+    {
+    }
+
+    public function getId(): IdentifierInterface
+    {
+        return $this->id;
+    }
+}
+```
+
+Should be fixed as:
+```php
+<?php
+class ExampleEntity implements EntityInterface
+{
+    public function __construct(private readonly ExampleEntityIdentifier $id)
+    {
+    }
+
+    public function getId(): ExampleEntityIdentifier
+    {
+        return $this->id;
+    }
+}
+```
+
+#### Object should not have conflicting interfaces
+Do not make objects that are a value object and entity at the same time for example :)
+
+#### Value object without constructor
+This one is easy to miss when making a value object often when used in combination with composite value objects.
+
+
+```php
+<?php
+class ExampleValueObject implements ValueObjectInterface
+{
+    use CompositeValueObject;
+
+    private string $property;
+}
+```
+Should be one of these:
+```php
+<?php
+class ExampleValueObject implements ValueObjectInterface
+{
+    use CompositeValueObject;
+
+    private string $property;
+
+    private function __construct() {
+    }
+}
+```
+Or:
+```php
+<?php
+class ExampleValueObject implements ValueObjectInterface
+{
+    use CompositeValueObject;
+
+    public function __construct(private string $property)
+    {
+    }
+}
+```
+
+#### Value Object with array should be composite
+Imagine this value object:
+```php
+<?php
+class ExampleValueObject implements ValueObjectInterface
+{
+    public function __construct(private string $property)
+    {
+    }
+
+    public static function fromNative(mixed $input): self
+    {
+        $input = Utils::toArray($input);
+        return new self($input['property'] ?? 'missing');
+    }
+
+    public function toNative(): array
+    {
+        return [
+            'property' => $this->property
+        ];
+    }
+}
+```
+An array typehint is unknown what OpenAPI schema can be created.
+It can be solved by using CompositeValueObject trait or use the SchemaMethod attribute:
+
+```php
+<?php
+#[SchemaMethod('provideSchema')]
+class ExampleValueObject implements ValueObjectInterface
+{
+    public function __construct(private string $property)
+    {
+    }
+
+    public static function fromNative(mixed $input): self
+    {
+        $input = Utils::toArray($input);
+        return new self($input['property'] ?? 'missing');
+    }
+
+    public function toNative(): array
+    {
+        return [
+            'property' => $this->property
+        ];
+    }
+
+    public static function provideSchema(): array
+    {
+        return [
+            'type' => 'object',
+            'properties' => [
+                'property' => ['type' => 'string', 'default' => 'missing']
+            ],
+            'required' => ['property']
+        ]
+    }
+}
+```

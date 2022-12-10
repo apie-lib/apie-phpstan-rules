@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use Throwable;
 
 /**
  * Ensure a class is not a value object and an entity at the same time for example.
@@ -37,7 +38,7 @@ final class ObjectShouldNotImplementMultipleInterfaces implements Rule
             return [];
         }
         $class = $this->getClass($node, $scope);
-        $interfacesToCheck = [ValueObjectInterface::class, DtoInterface::class, EntityInterface::class];
+        $interfacesToCheck = [ValueObjectInterface::class, DtoInterface::class, EntityInterface::class, Throwable::class];
         $conflicted = [];
         foreach ($interfacesToCheck as $interfaceToCheck) {
             if ($class->implementsInterface($interfaceToCheck)) {
