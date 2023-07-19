@@ -1,8 +1,8 @@
 <?php
 namespace Apie\ApiePhpstanRules;
 
-use Apie\CompositeValueObjects\CompositeValueObject;
 use Apie\Core\Attributes\SchemaMethod;
+use Apie\Core\ValueObjects\CompositeValueObject;
 use Apie\Core\ValueObjects\Interfaces\ValueObjectInterface;
 use PhpParser\Node;
 use PhpParser\Node\Stmt\Class_;
