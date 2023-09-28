@@ -15,4 +15,4 @@ parameters:
             reportUnmatched: false
         -
             message: '#\(Apie\\Core\\Identifiers\\IdentifierInterface<static#'
-            reportUnmatched: true
+            reportUnmatched: false
