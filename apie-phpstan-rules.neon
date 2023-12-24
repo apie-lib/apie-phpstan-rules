@@ -5,6 +5,10 @@ rules:
     - Apie\ApiePhpstanRules\EntityGetIdShouldBeSpecific
 parameters:
     ignoreErrors:
+        # fromNative inheritance could give some trouble with return type of fromNative
+        -
+            message: '#fromNative\(\) should return static\([^\)]+\) but returns#'
+            reportUnmatched: false
         # you do not have to specify subtype of ItemList or Itemhashmap.
         -
             message: '#generic class Apie\\Core\\Lists\\Item(List|Hashmap) (but |)does not specify its types: T#'
