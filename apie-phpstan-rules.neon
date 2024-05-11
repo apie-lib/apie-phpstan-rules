@@ -11,7 +11,7 @@ parameters:
             reportUnmatched: false
         # you do not have to specify subtype of ItemList or Itemhashmap.
         -
-            message: '#generic class Apie\\Core\\Lists\\Item(List|Hashmap) (but |)does not specify its types: T#'
+            message: '#generic class Apie\\Core\\Lists\\Item(List|Hashmap|Set) (but |)does not specify its types: T#'
             reportUnmatched: false
         # issue with dependency identifier and entity and generics.
         -
