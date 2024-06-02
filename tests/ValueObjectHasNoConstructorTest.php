@@ -17,6 +17,7 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
 
     /**
      * @dataProvider ruleProvider
+     * @runInSeparateProcess
      */
     public function testLegacyRule(array $rules, string... $fileToAnalyse): void
     {
