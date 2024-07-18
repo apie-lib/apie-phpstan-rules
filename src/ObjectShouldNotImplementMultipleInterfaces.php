@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use Psr\Http\Message\UploadedFileInterface;
 use Throwable;
 
 /**
@@ -38,7 +39,13 @@ final class ObjectShouldNotImplementMultipleInterfaces implements Rule
             return [];
         }
         $class = $this->getClass($node, $scope);
-        $interfacesToCheck = [ValueObjectInterface::class, DtoInterface::class, EntityInterface::class, Throwable::class];
+        $interfacesToCheck = [
+            UploadedFileInterface::class,
+            ValueObjectInterface::class,
+            DtoInterface::class,
+            EntityInterface::class,
+            Throwable::class
+        ];
         $conflicted = [];
         foreach ($interfacesToCheck as $interfaceToCheck) {
             if ($class->implementsInterface($interfaceToCheck)) {
