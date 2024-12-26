@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 
 /**
  * If value objects have array or stdClass as return type then they require the CompositeValueObject trait
@@ -42,14 +43,17 @@ final class ValueObjectWithArrayShouldBeComposite implements Rule
         if ($class->implementsInterface(ValueObjectInterface::class)) {
             $method = $class->getMethod('toNative', $scope);
             foreach ($method->getVariants() as $variant) {
-                if ($variant->getNativeReturnType() instanceof \PHPStan\Type\ArrayType) {
+                if ($variant->getNativeReturnType()->isArray()->yes()) {
                     if (!in_array(CompositeValueObject::class, $class->getNativeReflection()->getTraitNames())) {
                         if (empty($class->getNativeReflection()->getAttributes(SchemaMethod::class))) {
                             return [
-                                __CLASS__ => sprintf(
-                                    "Class '%s' is a value object that returns an array, but it does not use CompositeValueObject trait.",
-                                    $nodeName
-                                )
+                                RuleErrorBuilder::message(
+                                    sprintf(
+                                        "Class '%s' is a value object that returns an array, but it does not use CompositeValueObject trait.",
+                                        $nodeName
+                                    )
+                                )->identifier('apie.array.value.object')
+                                ->build()
                             ];
                         }
                     }

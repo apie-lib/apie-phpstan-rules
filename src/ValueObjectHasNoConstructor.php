@@ -8,6 +8,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 
 /**
  * Value object without constructor is often a mistake.
@@ -41,10 +42,13 @@ final class ValueObjectHasNoConstructor implements Rule
         $class = $this->getClass($node, $scope);
         if ($class->implementsInterface(ValueObjectInterface::class) && !$class->hasConstructor()) {
             return [
-                __CLASS__ => sprintf(
-                    "Class '%s' is a value object, but it has no constructor.",
-                    $node->name->toString()
-                )
+                RuleErrorBuilder::message(
+                    sprintf(
+                        "Class '%s' is a value object, but it has no constructor.",
+                        $node->name->toString()
+                    )
+                )->identifier('apie.no.constructor')
+                ->build()
             ];
         }
         return [

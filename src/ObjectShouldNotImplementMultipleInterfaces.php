@@ -10,6 +10,7 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Rules\Rule;
+use PHPStan\Rules\RuleErrorBuilder;
 use Psr\Http\Message\UploadedFileInterface;
 use Throwable;
 
@@ -61,11 +62,14 @@ final class ObjectShouldNotImplementMultipleInterfaces implements Rule
         }
         if (!empty($conflicted)) {
             return [
-                __CLASS__ => sprintf(
-                    "Class '%s' has conflicting interfaces: %s",
-                    $nodeName,
-                    implode(', ', $conflicted)
-                )
+                RuleErrorBuilder::message(
+                    sprintf(
+                        "Class '%s' has conflicting interfaces: %s",
+                        $nodeName,
+                        implode(', ', $conflicted)
+                    )
+                )->identifier('apie.conflicting.interface')
+                ->build()
             ];
         }
         return [
