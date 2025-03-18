@@ -1,5 +1,5 @@
 <?php
-namespace Apie\Tests\ApiePhpStanRules\Fixtures;
+namespace Apie\Tests\ApiePhpstanRules\Fixtures;
 
 class ValueObjectWithBaseClass extends AbstractValueObjectWithoutConstructor
 {

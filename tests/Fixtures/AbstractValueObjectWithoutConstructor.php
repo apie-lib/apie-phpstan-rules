@@ -1,5 +1,5 @@
 <?php
-namespace Apie\Tests\ApiePhpStanRules\Fixtures;
+namespace Apie\Tests\ApiePhpstanRules\Fixtures;
 
 use Apie\Core\ValueObjects\Interfaces\ValueObjectInterface;
 use UnitEnum;

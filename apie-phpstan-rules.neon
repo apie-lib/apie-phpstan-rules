@@ -1,8 +1,29 @@
 rules:
     - Apie\ApiePhpstanRules\ValueObjectHasNoConstructor
+    - Apie\ApiePhpstanRules\ObjectShouldNotImplementMultipleInterfaces
+    - Apie\ApiePhpstanRules\ValueObjectWithArrayShouldBeComposite
+    - Apie\ApiePhpstanRules\EntityGetIdShouldBeSpecific
 parameters:
     ignoreErrors:
+        # Issue with FakeFile attribute
+        -
+            message: '/Parameter #1 \$[^\s]+ of attribute class Apie\\Core\\Attributes\\FakeFile constructor expects class-string<Apie\\Faker\\Fakers\\ApieFileFaker>, string given/'
+            reportUnmatched: false
+        -
+            message: '/Unable to resolve the template type T in call to method static method Apie\\Faker\\FileFakerFactory::getSupportedFileFakers/'
+            reportUnmatched: false
+        # fromNative inheritance could give some trouble with return type of fromNative
+        -
+            message: '#fromNative\(\) should return static\([^\)]+\) but returns#'
+            reportUnmatched: false
         # you do not have to specify subtype of ItemList or Itemhashmap.
-        - '#generic class Apie\\Core\\Lists\\Item(List|Hashmap) (but |)does not specify its types: T#'
+        -
+            message: '#generic class Apie\\Core\\Lists\\Item(List|Hashmap|Set) (but |)does not specify its types: T#'
+            reportUnmatched: false
         # issue with dependency identifier and entity and generics.
-        - '# of Apie\\Core\\Entities\\EntityInterface>#'
+        -
+            message: '# of Apie\\Core\\Entities\\EntityInterface>#'
+            reportUnmatched: false
+        -
+            message: '#\(Apie\\Core\\Identifiers\\IdentifierInterface<static#'
+            reportUnmatched: false

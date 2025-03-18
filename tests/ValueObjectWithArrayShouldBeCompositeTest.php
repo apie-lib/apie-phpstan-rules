@@ -2,17 +2,18 @@
 namespace Apie\Tests\ApiePhpstanRules;
 
 use Apie\ApiePhpstanRules\ValueObjectHasNoConstructor;
+use Apie\ApiePhpstanRules\ValueObjectWithArrayShouldBeComposite;
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
 
 /**
- * @extends RuleTestCase<ValueObjectWithArrayShouldBeComposite>
+ * @extends RuleTestCase<ValueObjectHasNoConstructor>
  */
-class ValueObjectHasNoConstructorTest extends RuleTestCase
+class ValueObjectWithArrayShouldBeCompositeTest extends RuleTestCase
 {
     protected function getRule(): Rule
     {
-        return new ValueObjectHasNoConstructor($this->createReflectionProvider());
+        return new ValueObjectWithArrayShouldBeComposite($this->createReflectionProvider());
     }
 
     #[\PHPUnit\Framework\Attributes\DataProvider('ruleProvider')]
@@ -26,15 +27,9 @@ class ValueObjectHasNoConstructorTest extends RuleTestCase
     {
         yield [
             [
-                ["Class 'ValueObjectWithoutConstructor' is a value object, but it has no constructor.", 7]
+                ["Class 'ValueObjectWithArray' is a value object that returns an array, but it does not use CompositeValueObject trait.", 7],
             ],
-            __DIR__ . '/Fixtures/ValueObjectWithoutConstructor.php',
-        ];
-        yield [
-            [
-                ["Class 'ValueObjectWithBaseClass' is a value object, but it has no constructor.", 4]
-            ],
-            __DIR__ . '/Fixtures/ValueObjectWithBaseClass.php',
+            __DIR__ . '/Fixtures/ValueObjectWithArray.php',
         ];
         yield [
             [],
