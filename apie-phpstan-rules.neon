@@ -3,6 +3,7 @@ rules:
     - Apie\ApiePhpstanRules\ObjectShouldNotImplementMultipleInterfaces
     - Apie\ApiePhpstanRules\ValueObjectWithArrayShouldBeComposite
     - Apie\ApiePhpstanRules\EntityGetIdShouldBeSpecific
+    - Apie\ApiePhpstanRules\RegexValueObjectShouldImplementInterface
 parameters:
     ignoreErrors:
         # Issue with FakeFile attribute
