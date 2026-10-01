@@ -14,16 +14,18 @@ This package is part of the [Apie](https://github.com/apie-lib) library.
 The code is maintained in a monorepo, so PR's need to be sent to the [monorepo](https://github.com/apie-lib/apie-lib-monorepo/pulls)
 
 ## Documentation
-Adds phpstan rules specifically for Apie.
+`apie/apie-phpstan-rules` is a standalone set of PHPStan rules that enforce Apie's domain-object conventions
+(entities, value objects and composite value objects) so violations are caught statically instead of at runtime.
 
-Usage:
+### Standalone usage
 ```bash
 composer require --dev apie/apie-phpstan-rules
 ```
 
-and in your phpstan.neon the include to the neon file.
+Include the shipped rule set in your project's `phpstan.neon`:
+
 ```yaml
-includes
+includes:
     - './vendor/apie/apie-phpstan-rules/apie-phpstan-rules.neon'
 ```
 
@@ -66,6 +68,10 @@ class ExampleEntity implements EntityInterface
 
 #### Object should not have conflicting interfaces
 Do not make objects that are a value object and entity at the same time for example :)
+
+#### Regex value object should implement interface
+A value object using the `IsStringWithRegexValueObject` trait must also implement `HasRegexValueObjectInterface`,
+so the regex pattern it validates against can be introspected (for example to generate an OpenAPI schema).
 
 #### Value object without constructor
 This one is easy to miss when making a value object often when used in combination with composite value objects.
